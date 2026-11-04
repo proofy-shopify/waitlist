@@ -11,6 +11,7 @@
   --blue-2: #38bdf8;
   --blue-hover: #0284c7;
   --blue-deep: #0369a1;
+  --shopify: #95bf47;
   --ice: #e0f2fe;
   --ice-2: #bae6fd;
   --paper: #ffffff;
@@ -165,6 +166,8 @@ button {
 }
 
 .badge {
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   gap: 7px;
@@ -176,6 +179,63 @@ button {
   -webkit-backdrop-filter: blur(8px);
   font-size: 0.8125rem;
   color: var(--faint);
+}
+
+.badge__row {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.badge__note {
+  color: #8a9099;
+}
+
+/* Metallic shine across the letters (like a light passing over chrome lettering).
+   The white copy sits exactly on top and is masked to a diagonal band that travels
+   left to right, starting as soon as the page loads. */
+.badge__shine {
+  position: absolute;
+  inset: 0;
+  padding: inherit;
+  pointer-events: none;
+  color: #ffffff;
+  text-shadow: 0 0 6px rgba(14, 165, 233, 0.75), 0 0 1px rgba(3, 105, 161, 0.6);
+  -webkit-mask-image: linear-gradient(110deg, transparent 38%, #000 47%, #000 53%, transparent 62%);
+  mask-image: linear-gradient(110deg, transparent 38%, #000 47%, #000 53%, transparent 62%);
+  -webkit-mask-size: 300% 100%;
+  mask-size: 300% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
+  animation: badge-chrome 3.4s cubic-bezier(0.45, 0, 0.25, 1) 0.25s infinite;
+}
+
+.badge__shine .badge__brand,
+.badge__shine .badge__note {
+  color: #ffffff;
+}
+
+.badge__shine .shopify-mark {
+  filter: drop-shadow(0 0 3px rgba(14, 165, 233, 0.8));
+}
+
+@keyframes badge-chrome {
+  0% {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+  60%, 100% {
+    -webkit-mask-position: 0% 0;
+    mask-position: 0% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge__shine {
+    display: none;
+  }
 }
 
 .badge__brand {
@@ -654,7 +714,7 @@ button {
   gap: 3px;
   padding: 1px 7px;
   border-radius: 999px;
-  background: var(--blue);
+  background: var(--shopify);
   color: #fff;
   font-size: 0.625rem;
   font-weight: 600;
@@ -668,7 +728,7 @@ button {
   padding: 12px 13px;
   border-radius: 16px;
   background: #fff;
-  border-top: 3px solid var(--blue);
+  border-top: 3px solid var(--shopify);
   box-shadow: 0 18px 36px -20px rgba(3, 105, 161, 0.6);
 }
 
@@ -736,7 +796,7 @@ button {
   top: -9px;
   right: 10px;
   z-index: 1;
-  box-shadow: 0 6px 14px -6px rgba(14, 165, 233, 0.8);
+  box-shadow: 0 6px 14px -6px rgba(110, 150, 50, 0.75);
 }
 
 .ig__sheet {
@@ -1006,7 +1066,7 @@ button {
   top: -9px;
   right: 10px;
   z-index: 1;
-  box-shadow: 0 6px 14px -6px rgba(14, 165, 233, 0.8);
+  box-shadow: 0 6px 14px -6px rgba(110, 150, 50, 0.75);
 }
 
 .ct-review .fl-review__top span {

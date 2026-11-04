@@ -180,7 +180,8 @@ export default function CommentTransitions() {
         logoHeight={148}
         fadeOut
         fadeOutWidth={0.08}
-        pauseOnHover
+        pauseOnHover={false}
+        reducedMotionSpeed={20}
         draggable
         wheel
         intro={false}

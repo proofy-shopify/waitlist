@@ -65,8 +65,9 @@ The page behind the frame is a plain CSS sky-blue gradient (`.page-backdrop`).
 | Component | Where |
 | --- | --- |
 | BlurText | Headline entrance (with an added `as` prop so it renders inside the `<h1>`) |
-| ShinyText | "coming soon" in the badge |
 | LogoLoop | Comment → review slider |
+
+The "proofy · coming soon" badge's metallic shine is plain CSS (`.badge__shine` in `src/styles.css`).
 
 All live in `src/components/reactbits/`, copied from the React Bits source (MIT + Commons Clause).
 

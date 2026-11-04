@@ -544,7 +544,9 @@ const createEngine = (root, track, config, setLayout) => {
     const travel = Math.sign(cfg.speed) || 1;
     const paused = st.focused || (st.hovered && cfg.hoverValue !== undefined);
     const pausedSpeed = st.focused ? 0 : (cfg.hoverValue ?? 0);
-    let target = st.reduced ? 0 : paused ? pausedSpeed * travel * cfg.dirSign : cfg.speed * cfg.dirSign;
+    // Added: with reduced motion, drift at reducedMotionSpeed (if set) instead of stopping.
+    const autoSpeed = st.reduced ? (cfg.reducedMotionSpeed ?? 0) : cfg.speed;
+    let target = paused ? pausedSpeed * travel * cfg.dirSign : autoSpeed * cfg.dirSign;
     if (cfg.scrollBoost > 0 && !st.reduced) {
       st.scrollVel *= Math.exp(-dt / 0.18);
       if (Math.abs(st.scrollVel) > 1) busy = true;
@@ -932,6 +934,7 @@ export const LogoLoop = memo(
     labels = 'none',
     draggable = true,
     wheel = false,
+    reducedMotionSpeed,
     scrollBoost = 0,
     intro = true,
     renderItem,
@@ -961,6 +964,7 @@ export const LogoLoop = memo(
       step,
       draggable,
       wheel,
+      reducedMotionSpeed,
       scrollBoost,
       intro,
       scaleOnHover,

@@ -10,7 +10,7 @@ export function FrameBackground() {
   return (
     <div className="frame-bg" aria-hidden="true">
       <Grainient
-        colors={['#ffffff', '#e0f2fe', '#7dd3fc', '#38bdf8', '#f0f9ff']}
+        colors={['#ffffff', '#e0f2fe', '#7dd3fc', '#38bdf8', '#e4f2cf']}
         angle={150}
         speed={0.5}
         flow={0.7}
