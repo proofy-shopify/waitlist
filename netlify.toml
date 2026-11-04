@@ -1,0 +1,7 @@
+# Netlify: builds the Vite site and deploys the functions in netlify/functions (served at /api/*).
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[functions]
+  node_bundler = "esbuild"
