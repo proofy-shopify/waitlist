@@ -17,7 +17,11 @@ async function call(cfg, path, init) {
   });
   const text = await res.text();
   if (!res.ok) {
-    const err = new Error(`Supabase ${init.method || 'GET'} ${path.split('?')[0]} failed: ${res.status} ${text.slice(0, 300)}`);
+    // PGRST202 = function not found, PGRST205 = table not found: the database setup hasn't been run here.
+    const hint = /PGRST20[25]/.test(text)
+      ? ' → The waitlist tables/functions are missing in this Supabase project. Run supabase/migrations/20261104120000_waitlist.sql in the SQL Editor of the project that SUPABASE_URL points to.'
+      : '';
+    const err = new Error(`Supabase ${init.method || 'GET'} ${path.split('?')[0]} failed: ${res.status} ${text.slice(0, 300)}${hint}`);
     err.status = res.status;
     throw err;
   }

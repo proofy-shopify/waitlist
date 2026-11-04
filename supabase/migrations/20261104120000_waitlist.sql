@@ -154,3 +154,6 @@ create or replace view public.waitlist_active as
   order by created_at;
 
 revoke all on public.waitlist_active from public;
+
+-- Tell Supabase's API (PostgREST) to pick up the new tables and functions right away.
+notify pgrst, 'reload schema';

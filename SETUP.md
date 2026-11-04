@@ -3,6 +3,9 @@
 About 20 minutes end to end. You need accounts on **Supabase**, **Resend**, and **Vercel or Netlify**
 (all have free tiers that cover a waitlist), plus access to your domain's DNS.
 
+Supabase is only the database. The API runs as serverless functions on Vercel or Netlify, on the same
+domain as the site.
+
 ## How it works
 
 ```
@@ -29,7 +32,7 @@ security scanners that "click" every link can't confirm or unsubscribe people. G
 ## 1. Supabase (database)
 
 1. Create a project at [supabase.com](https://supabase.com). A region close to your visitors is best.
-2. **SQL Editor → New query**, paste all of `supabase/migrations/20261104_waitlist.sql`, click **Run**.
+2. **SQL Editor → New query**, paste all of `supabase/migrations/20261104120000_waitlist.sql`, click **Run**.
    It's safe to run again later.
 3. **Project Settings → API Keys**: copy the **secret** key (`sb_secret_…`) into `SUPABASE_SECRET_KEY`.
    Older projects can use the legacy `service_role` key in `SUPABASE_SERVICE_ROLE_KEY` instead.
@@ -99,7 +102,7 @@ Turn it on only if spam gets past the honeypot and rate limit.
 cp .env.example .env.local   # fill in your Supabase + Resend values
 npm install
 npm run dev                  # the page and the /api functions on http://localhost:5173
-npm test                     # 17 API tests against a real Postgres (PGlite), no accounts needed
+npm test                     # 18 API tests against a real Postgres (PGlite), no accounts needed
 ```
 
 Without `RESEND_API_KEY`, emails aren't sent. The full email, including the confirm link, is printed in
@@ -112,7 +115,7 @@ the terminal instead, so you can test the whole flow locally.
 | `DOUBLE_OPT_IN` | `true` | `false` = confirm immediately and send a "You're on the list" email instead |
 | `RATE_LIMIT_MAX` / `RATE_LIMIT_WINDOW_SECONDS` | `5` / `600` | Signups allowed per IP per window |
 | `RESEND_COOLDOWN_SECONDS` | `600` | Minimum gap before re-sending a confirmation link |
-| `ALLOWED_ORIGINS` | none | Other sites allowed to call the API (same domain always works) |
+| `ALLOWED_ORIGINS` | none | Other sites allowed to call the API (same domain and `SITE_URL` always work) |
 
 Email copy is in `server/email.js`; pop-up screen copy is `screens` in `src/content.js`.
 

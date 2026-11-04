@@ -10,7 +10,7 @@ import { createHash } from 'node:crypto';
 import { PGlite } from '@electric-sql/pglite';
 import { handleWaitlist, handleConfirm, handleUnsubscribe } from '../server/core.js';
 
-const MIGRATION = readFileSync(new URL('../supabase/migrations/20261104_waitlist.sql', import.meta.url), 'utf8');
+const MIGRATION = readFileSync(new URL('../supabase/migrations/20261104120000_waitlist.sql', import.meta.url), 'utf8');
 const SUPABASE = 'https://test.supabase.co';
 const SITE = 'https://proofy.test';
 const sha256 = v => createHash('sha256').update(v).digest('hex');
@@ -310,4 +310,29 @@ test('wrong method and oversized bodies are rejected', async () => {
   assert.equal((await handleWaitlist(new Request(`${SITE}/api/waitlist`), baseEnv)).status, 405);
   const big = await signup({ email: 'big@shop.com', referrer: 'x'.repeat(5000) });
   assert.equal(big.status, 413);
+});
+
+/* ───────── Cross-domain calls ───────── */
+
+test('the site may call the API from another domain (CORS preflight and response)', async () => {
+  const pre = await handleWaitlist(
+    new Request('https://api.example.com/api/waitlist', {
+      method: 'OPTIONS',
+      headers: { Origin: SITE, 'Access-Control-Request-Method': 'POST' }
+    }),
+    baseEnv
+  );
+  assert.equal(pre.status, 204);
+  assert.equal(pre.headers.get('access-control-allow-origin'), SITE);
+  const res = await handleWaitlist(
+    new Request('https://api.example.com/api/waitlist', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Origin: SITE },
+      body: JSON.stringify({ email: 'cors@shop.com' })
+    }),
+    baseEnv,
+    { ip: '192.0.2.1' }
+  );
+  assert.equal(res.status, 200);
+  assert.equal(res.headers.get('access-control-allow-origin'), SITE);
 });

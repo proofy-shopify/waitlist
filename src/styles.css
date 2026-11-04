@@ -49,8 +49,9 @@ body {
   overflow-x: hidden;
 }
 
+/* Full height so the framed panel can be centered vertically */
 #root {
-  min-height: 100%;
+  height: 100%;
 }
 
 h1,
@@ -104,7 +105,7 @@ button {
   align-items: center;
   justify-content: center;
   gap: 22px;
-  padding-block: clamp(20px, 6vh, 72px) clamp(20px, 4vh, 40px);
+  padding-block: clamp(20px, 5vh, 56px);
   padding-left: var(--gl);
   padding-right: var(--gr);
 }

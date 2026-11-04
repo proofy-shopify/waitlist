@@ -26,7 +26,7 @@ All the logic is in `server/`; the database schema is `supabase/migrations/`.
 mode and nothing leaves the browser.
 
 ```bash
-npm test   # 17 API tests against a real Postgres (PGlite), no accounts needed
+npm test   # 18 API tests against a real Postgres (PGlite), no accounts needed
 ```
 
 ## Edit the copy

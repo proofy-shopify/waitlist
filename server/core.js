@@ -35,9 +35,11 @@ function clientIp(request, ctx) {
   );
 }
 
+// The site itself (SITE_URL) and anything in ALLOWED_ORIGINS may call the API from the browser.
 function corsHeaders(request, cfg) {
   const origin = request.headers.get('origin');
-  if (!origin || !cfg.allowedOrigins.includes(origin.replace(/\/+$/, ''))) return {};
+  const clean = origin ? origin.replace(/\/+$/, '') : '';
+  if (!clean || !(cfg.allowedOrigins.includes(clean) || clean === cfg.siteUrl)) return {};
   return {
     'Access-Control-Allow-Origin': origin,
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
