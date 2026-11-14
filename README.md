@@ -29,6 +29,19 @@ mode and nothing leaves the browser.
 npm test   # 18 API tests against a real Postgres (PGlite), no accounts needed
 ```
 
+## SEO and sharing
+
+- **Prerendering:** `npm run build` renders the page to HTML at build time (`src/entry-server.jsx`,
+  `scripts/prerender.mjs`), so crawlers and link previews see the headline and copy without running
+  JavaScript. The browser then attaches to that HTML.
+- **Head tags** are in `index.html`: title, description, canonical, Open Graph / Twitter tags and
+  structured data. They assume the site lives at `https://www.proofy.site/`; change the URLs there, in
+  `public/robots.txt` and in `public/sitemap.xml` if the address changes.
+- **`public/`** holds the favicon set (made from the Proofy logo), `og-image.png` (the picture shown when
+  the link is shared), `robots.txt`, `sitemap.xml` and `privacy.html`.
+- **Background animation** runs only on devices with a mouse and pauses when the tab is hidden; phones,
+  tablets and "reduce motion" get a still gradient (`src/components/Backgrounds.jsx`).
+
 ## Edit the copy
 
 Everything is in `src/content.js`: badge, headline (dark + grey halves), subtitle, button label, the
@@ -79,7 +92,10 @@ netlify/functions/         Netlify functions (thin wrappers)
 server/                    waitlist API: core.js, supabase.js, email.js, config.js
 supabase/migrations/       database schema
 tests/                     API tests
+public/                    favicon, share image, robots.txt, sitemap.xml, privacy.html
+scripts/prerender.mjs      writes the page HTML into the build
 src/
+  entry-server.jsx         build-time render used by the prerender step
   App.jsx                  page
   content.js               all copy
   styles.css               design tokens + layout

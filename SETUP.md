@@ -127,6 +127,7 @@ database, confirmation emails and unsubscribe links. You can switch to the API l
 
 ## Privacy checklist
 
-- Add a privacy policy and put its URL in `privacyUrl` in `src/content.js`. A link appears under the form.
+- A starter privacy policy is at `public/privacy.html` and linked under the form and in the footer. Read it
+  and adjust it to your business (add a contact address) before launch.
 - Every email has an unsubscribe link, and unsubscribing is honored immediately.
 - To delete someone on request: Supabase → Table Editor → waitlist → delete their row.

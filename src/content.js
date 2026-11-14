@@ -9,12 +9,12 @@ export const hero = {
   badge: 'coming soon',
   titleDark: 'Your ad comments,',
   titleGrey: 'now your best reviews.',
-  sub: 'Turn Meta ad comments into Shopify reviews. Stay updated, select your best comments across campaigns, and showcase them with beautiful, customizable templates.',
+  sub: 'Turn Facebook & Instagram ads comments into beautiful Shopify reviews, automatically.',
   placeholder: 'Your email address',
   button: 'Get Notified',
   // One line under the form. Add your privacy policy URL to show a link next to it.
   privacy: 'Launch updates only. No spam, unsubscribe anytime.',
-  privacyUrl: ''
+  privacyUrl: '/privacy.html'
 };
 
 export const footer = {

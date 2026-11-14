@@ -3,14 +3,47 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Proofy Waitlist</title>
-    <meta name="description" content="Proofy is a Shopify app that turns the happiest comments on your Meta ads into reviews on your store. Join the waitlist." />
-    <meta name="theme-color" content="#5c9bff" />
+    <title>Proofy: Turn Facebook &amp; Instagram Ad Comments into Shopify Reviews</title>
+    <meta name="description" content="Turn Facebook &amp; Instagram ads comments into beautiful Shopify reviews, automatically. Proofy is a Shopify app coming soon. Join the waitlist for early access." />
+    <link rel="canonical" href="https://www.proofy.site/" />
+    <meta name="theme-color" content="#38bdf8" />
+
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Proofy" />
+    <meta property="og:url" content="https://www.proofy.site/" />
     <meta property="og:title" content="Proofy: your ad comments, now your best reviews" />
-    <meta property="og:description" content="A Shopify app that shows positive Facebook and Instagram ad comments as reviews on your store. Join the waitlist." />
+    <meta property="og:description" content="Turn Facebook &amp; Instagram ads comments into beautiful Shopify reviews, automatically. Join the waitlist." />
+    <meta property="og:image" content="https://www.proofy.site/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Proofy: your ad comments, now your best reviews" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Proofy: your ad comments, now your best reviews" />
+    <meta name="twitter:description" content="Turn Facebook &amp; Instagram ads comments into beautiful Shopify reviews, automatically. Join the waitlist." />
+    <meta name="twitter:image" content="https://www.proofy.site/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Proofy",
+        "url": "https://www.proofy.site/",
+        "image": "https://www.proofy.site/icon-512.png",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Shopify",
+        "description": "A Shopify app that turns positive comments on Facebook and Instagram ads into reviews on your store."
+      }
+    </script>
+    <!-- Without JavaScript the headline's entrance animation never runs: show it as-is. -->
+    <noscript><style>.hero__title span { opacity: 1 !important; filter: none !important; transform: none !important; }</style></noscript>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"><!--app-html--></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

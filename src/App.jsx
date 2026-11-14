@@ -141,7 +141,7 @@ export default function App() {
           <p className="captions__right">
             {footer.right[0]}
             <br />
-            {footer.right[1]}
+            {footer.right[1]} · <a href={hero.privacyUrl || '/privacy.html'}>Privacy</a>
           </p>
         </footer>
       </main>

@@ -6,7 +6,7 @@
   --ink: #0b1733;
   --grey: #5b6478;
   --dim: #3b465f;
-  --faint: #7a8499;
+  --faint: #5f6980;
   --blue: #0ea5e9;
   --blue-2: #38bdf8;
   --blue-hover: #0284c7;
@@ -145,6 +145,16 @@ button {
   inset: 0;
 }
 
+/* still version of the animated background (phones, tablets, reduced motion, and before JS loads) */
+.frame-bg__still {
+  background:
+    radial-gradient(42% 46% at 4% 4%, #e4f2cf 0%, rgba(228, 242, 207, 0) 100%),
+    radial-gradient(55% 60% at 100% 45%, rgba(56, 189, 248, 0.75) 0%, rgba(56, 189, 248, 0) 100%),
+    radial-gradient(60% 55% at 30% 100%, rgba(56, 189, 248, 0.8) 0%, rgba(56, 189, 248, 0) 100%),
+    radial-gradient(40% 40% at 100% 100%, #f0f9ff 0%, rgba(240, 249, 255, 0) 100%),
+    linear-gradient(150deg, #e0f2fe 0%, #bae6fd 45%, #7dd3fc 100%);
+}
+
 /* soft white wash in the middle keeps the copy readable on every style */
 .frame-bg__veil {
   background: radial-gradient(46% 42% at 50% 55%, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0) 100%);
@@ -189,7 +199,7 @@ button {
 }
 
 .badge__note {
-  color: #8a9099;
+  color: #5f6980;
 }
 
 /* Metallic shine across the letters (like a light passing over chrome lettering).
@@ -352,7 +362,7 @@ button {
 }
 
 .waitlist__field input::placeholder {
-  color: #9aa0a8;
+  color: #6b7488;
 }
 
 .hp {
@@ -481,6 +491,11 @@ button {
   letter-spacing: 0.02em;
   text-transform: uppercase;
   color: rgba(11, 23, 51, 0.82);
+}
+
+.captions a {
+  color: inherit;
+  text-underline-offset: 2px;
 }
 
 .captions__center {
@@ -716,7 +731,7 @@ button {
   padding: 1px 7px;
   border-radius: 999px;
   background: var(--shopify);
-  color: #fff;
+  color: var(--ink);
   font-size: 0.625rem;
   font-weight: 600;
 }
@@ -763,7 +778,7 @@ button {
   height: 18px;
   border-radius: 50%;
   background: var(--blue);
-  color: #fff;
+  color: var(--ink);
   font-size: 0.5rem;
   font-weight: 700;
 }
