@@ -29,23 +29,43 @@ mode and nothing leaves the browser.
 npm test   # 18 API tests against a real Postgres (PGlite), no accounts needed
 ```
 
-## SEO and sharing
+## Pages and SEO
 
-- **Prerendering:** `npm run build` renders the page to HTML at build time (`src/entry-server.jsx`,
-  `scripts/prerender.mjs`), so crawlers and link previews see the headline and copy without running
-  JavaScript. The browser then attaches to that HTML.
-- **Head tags** are in `index.html`: title, description, canonical, Open Graph / Twitter tags and
-  structured data. They assume the site lives at `https://www.proofy.site/`; change the URLs there, in
-  `public/robots.txt` and in `public/sitemap.xml` if the address changes.
-- **`public/`** holds the favicon set (made from the Proofy logo), `og-image.png` (the picture shown when
-  the link is shared), `robots.txt`, `sitemap.xml` and `privacy.html`.
+| Address | What it is |
+| --- | --- |
+| `/` | Homepage: first screen (unchanged design) plus How it works, Why, Features, Guides, FAQ and a final waitlist panel |
+| `/shopify-social-proof`, `/facebook-comments-shopify`, `/instagram-comments-shopify`, `/facebook-ads-social-proof` | Landing pages, all from one template (`src/pages/LandingPage.jsx`) with copy in `src/content/landing.js` |
+| `/privacy` | Static privacy page (`public/privacy.html`) |
+| `/blog`, `/blog/<slug>` | Only built once a post is published (see below) |
+
+- **Routing:** `src/routes.js` lists every page with its title, description and FAQs. `npm run build`
+  prerenders each page to `<path>.html` (Vercel's `cleanUrls` and Netlify serve it without `.html`),
+  writes `404.html` (served with a real 404 status) and generates `sitemap.xml` from the same list.
+  Each page downloads only its own code; links between pages are ordinary links.
+- **Head tags and structured data** come from `src/seo.js`: title, description, canonical, robots,
+  Open Graph, Twitter card and JSON-LD (Organization, WebSite, WebPage, SoftwareApplication on the
+  homepage, BreadcrumbList on inner pages, FAQPage wherever FAQs are shown). Nothing invented: no
+  ratings, prices or counts.
+- **Preferred address:** `https://www.proofy.site`, set in `src/site.js` and `public/robots.txt`.
+  `vercel.json` redirects `proofy.site` to it (except `/api/*`, so email links keep working).
+  On Netlify, make `www.proofy.site` the primary domain in Domain management instead.
+  Keep `SITE_URL` (server env) on the same address.
+- **Homepage H1:** the big tagline ("Your ad comments, now your best reviews.") is still the visual
+  headline; the line under it is the page's `<h1>` ("…into Shopify social proof."). Both are in
+  `src/content.js`.
+- **Blog:** posts live in `src/content/blog.js`. Seven drafts with briefs and outlines are there;
+  write a post's `sections`, set `status: 'published'` and a `date`, and rebuild. The post gets its
+  own page, BlogPosting structured data, a place on `/blog`, a footer link and a sitemap entry.
+- **`public/`** holds the favicon set, `og-image.jpg` (the share picture; `og-image.png` is kept for
+  links shared before), `robots.txt` and `privacy.html`.
 - **Background animation** runs only on devices with a mouse and pauses when the tab is hidden; phones,
   tablets and "reduce motion" get a still gradient (`src/components/Backgrounds.jsx`).
 
 ## Edit the copy
 
-Everything is in `src/content.js`: badge, headline (dark + grey halves), subtitle, button label, the
-"how it works" line, captions under the frame, and the success modal.
+Homepage copy, the homepage sections and FAQs, captions and the success modal are in `src/content.js`.
+Landing pages are in `src/content/landing.js`, blog posts in `src/content/blog.js`. In those files,
+`[text](/path)` makes a link and `**text**` makes bold text.
 
 
 ## Comment → review slider
@@ -92,12 +112,19 @@ netlify/functions/         Netlify functions (thin wrappers)
 server/                    waitlist API: core.js, supabase.js, email.js, config.js
 supabase/migrations/       database schema
 tests/                     API tests
-public/                    favicon, share image, robots.txt, sitemap.xml, privacy.html
+public/                    favicon, share image, robots.txt, privacy.html (sitemap.xml is generated)
 scripts/prerender.mjs      writes the page HTML into the build
 src/
   entry-server.jsx         build-time render used by the prerender step
-  App.jsx                  page
-  content.js               all copy
+  main.jsx                 picks the page for the address and attaches to the prerendered HTML
+  App.jsx                  shell shared by every page: waitlist state + success modal
+  routes.js                list of pages (titles, descriptions, sitemap)
+  seo.js                   head tags + JSON-LD
+  site.js                  preferred address
+  content.js               homepage copy
+  content/landing.js       landing-page copy
+  content/blog.js          blog posts (drafts until published)
+  pages/                   Home, LandingPage, Blog, NotFound
   styles.css               design tokens + layout
   lib/waitlist.js          form submission
   components/
@@ -106,6 +133,9 @@ src/
     SuccessModal.jsx       "added to our waitlist" dialog
     CommentTransitions.jsx comment → review slider under the form
     BrandIcon.jsx          Meta / Facebook / Instagram / Shopify glyphs
+    Badge.jsx              "proofy · coming soon" badge with the shine
+    SiteChrome.jsx         inner-page header, breadcrumbs, final waitlist panel, footer
+    Rich.jsx               copy renderer, numbered steps, FAQ
     reactbits/
 ```
 

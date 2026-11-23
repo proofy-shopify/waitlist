@@ -10,16 +10,17 @@ export function PageBackdrop() {
 // The animated version runs only on devices with a mouse and without "reduce motion";
 // phones and tablets get a still gradient that looks the same but costs no battery.
 // (Grainient itself also pauses whenever the tab is hidden or the frame is off-screen.)
-export function FrameBackground() {
+// `still`: always use the CSS gradient (for secondary panels, so the page runs one WebGL scene at most).
+export function FrameBackground({ still = false }) {
   const [animated, setAnimated] = useState(false);
 
   useEffect(() => {
     const query = window.matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)');
-    const update = () => setAnimated(query.matches);
+    const update = () => setAnimated(!still && query.matches);
     update();
     query.addEventListener('change', update);
     return () => query.removeEventListener('change', update);
-  }, []);
+  }, [still]);
 
   return (
     <div className="frame-bg" aria-hidden="true">

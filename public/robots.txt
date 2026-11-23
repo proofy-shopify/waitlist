@@ -1,5 +1,8 @@
+# Proofy: everything public may be crawled except the waitlist API and one-time email links.
 User-agent: *
 Allow: /
 Disallow: /api/
+Disallow: /*?confirm=
+Disallow: /*?unsubscribe=
 
 Sitemap: https://www.proofy.site/sitemap.xml

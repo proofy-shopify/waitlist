@@ -2,6 +2,7 @@ import { useId, useRef, useState } from 'react';
 import { joinWaitlist } from '../lib/waitlist';
 import Turnstile from './Turnstile';
 import { hero } from '../content';
+import { useWaitlist } from '../waitlistContext';
 
 function MailIcon() {
   return (
@@ -12,8 +13,11 @@ function MailIcon() {
   );
 }
 
-export default function WaitlistForm({ joinedEmail, onJoined, onReset }) {
+// `source` is stored with the signup so you can see which form people used (hero, final CTA, a landing page).
+export default function WaitlistForm({ source = 'hero', id: anchorId }) {
+  const { joinedEmail, onJoined, onReset } = useWaitlist();
   const id = useId();
+  const inputId = `${id}-email`;
   const errorId = `${id}-error`;
   const [email, setEmail] = useState('');
   const [honeypot, setHoneypot] = useState('');
@@ -24,7 +28,7 @@ export default function WaitlistForm({ joinedEmail, onJoined, onReset }) {
 
   if (joinedEmail) {
     return (
-      <div className="joined" role="status">
+      <div className="joined" role="status" id={anchorId}>
         <span className="joined__pill">
           <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
             <circle cx="10" cy="10" r="10" fill="var(--blue)" />
@@ -47,7 +51,7 @@ export default function WaitlistForm({ joinedEmail, onJoined, onReset }) {
     setError('');
     setState('sending');
     try {
-      const result = await joinWaitlist({ email, source: 'hero', honeypot, turnstileToken });
+      const result = await joinWaitlist({ email, source, honeypot, turnstileToken });
       setState('idle');
       onJoined(email.trim().toLowerCase(), result);
       setEmail('');
@@ -60,15 +64,15 @@ export default function WaitlistForm({ joinedEmail, onJoined, onReset }) {
   };
 
   return (
-    <form className="waitlist" onSubmit={onSubmit} noValidate>
-      <label htmlFor="waitlist-email" className="sr-only">
+    <form className="waitlist" id={anchorId} onSubmit={onSubmit} noValidate>
+      <label htmlFor={inputId} className="sr-only">
         Email address
       </label>
       <div className={`waitlist__field${state === 'error' ? ' is-invalid' : ''}`}>
         <div className="waitlist__input">
           <MailIcon />
           <input
-            id="waitlist-email"
+            id={inputId}
             name="email"
             type="email"
             inputMode="email"
@@ -91,7 +95,7 @@ export default function WaitlistForm({ joinedEmail, onJoined, onReset }) {
           autoComplete="off"
           aria-hidden="true"
           name="company_website"
-          id="waitlist-hp"
+          id={`${id}-hp`}
           value={honeypot}
           onChange={e => setHoneypot(e.target.value)}
         />

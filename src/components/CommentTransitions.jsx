@@ -152,7 +152,7 @@ function StoreReview({ t }) {
   );
 }
 
-function Pair({ t, i }) {
+export function Pair({ t, i }) {
   return (
     <div className="ct-pair">
       <div className="ct-pair__from">
@@ -167,6 +167,19 @@ function Pair({ t, i }) {
         <StoreReview t={t} />
       </div>
     </div>
+  );
+}
+
+// A single comment → review pair, used as a still illustration on the landing pages.
+export function ExamplePair({ index = 0, caption }) {
+  const t = transitions[index % transitions.length];
+  return (
+    <figure className="example">
+      <div aria-hidden="true">
+        <Pair t={t} i={index} />
+      </div>
+      <figcaption className="example__caption">{caption}</figcaption>
+    </figure>
   );
 }
 

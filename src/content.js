@@ -7,20 +7,126 @@ export const brand = {
 
 export const hero = {
   badge: 'coming soon',
+  // The big two-line tagline (shown as the headline, but it isn't the page's <h1>)
   titleDark: 'Your ad comments,',
   titleGrey: 'now your best reviews.',
-  sub: 'Turn Facebook & Instagram ads comments into beautiful Shopify reviews, automatically.',
+  // The page's <h1> for search engines, shown in the smaller line under the tagline
+  sub: 'Turn Facebook & Instagram ad comments into Shopify social proof.',
   placeholder: 'Your email address',
   button: 'Get Notified',
   // One line under the form. Add your privacy policy URL to show a link next to it.
   privacy: 'Launch updates only. No spam, unsubscribe anytime.',
-  privacyUrl: '/privacy.html'
+  privacyUrl: '/privacy'
 };
 
 export const footer = {
   left: ['Proofy', 'Shopify app'],
   center: ['Meta ad comments', 'into store reviews'],
   right: ['Waitlist open', `© 2026 Proofy`]
+};
+
+// ── Homepage sections below the first screen ──
+// Text can contain [link text](/path) for internal links.
+export const home = {
+  how: {
+    eyebrow: 'How it works',
+    title: 'How Proofy works',
+    intro: 'Three steps take a comment from under your ad to your product page.',
+    steps: [
+      {
+        title: 'Connect your Meta account',
+        text: 'Link the Meta ad account you run your Facebook and Instagram ads from.'
+      },
+      {
+        title: 'Choose your ad campaigns',
+        text: 'Select the Facebook and Instagram campaigns you want Proofy to scan for comments.'
+      },
+      {
+        title: 'Show the best comments on Shopify',
+        text: 'Proofy collects the comments and highlights the positive ones. You pick which appear on your product pages.'
+      }
+    ]
+  },
+  why: {
+    eyebrow: 'Why it matters',
+    title: 'Your ad comments are social proof you already have',
+    paragraphs: [
+      'Shoppers look for signs that people like them have bought a product and were happy with it. Busy ads often collect exactly that: customers saying how a product fits, lasts or performs, in their own words and in public.',
+      'The trouble is where those comments live. A shopper sees them for a moment in the feed, taps through, and lands on a product page that shows none of it. Proofy brings that engagement to the page where the buying decision happens. Read more about [what social proof means for a Shopify store](/shopify-social-proof).'
+    ]
+  },
+  features: {
+    eyebrow: 'Features',
+    title: 'Built for stores that advertise on Meta',
+    items: [
+      {
+        title: 'Meta campaign scanning',
+        text: 'Choose which Facebook and Instagram ad campaigns Proofy reads. Nothing outside your selection is touched.'
+      },
+      {
+        title: 'Automatic comment collection',
+        text: 'Comments on your selected campaigns are collected for you as they come in. No screenshots, no copy and paste.'
+      },
+      {
+        title: 'Comment selection and management',
+        text: 'Proofy highlights the positive comments. You decide which ones go live and can take any of them down again.'
+      },
+      {
+        title: 'Social proof on product pages',
+        text: 'Selected comments appear on your Shopify product pages in a display you can customize to suit your store.'
+      }
+    ]
+  },
+  guides: {
+    eyebrow: 'Learn more',
+    title: 'Guides to ad comments as social proof',
+    // Each card's summary is the `teaser` in src/content/landing.js
+    links: [
+      { href: '/shopify-social-proof', label: 'Shopify social proof' },
+      { href: '/facebook-comments-shopify', label: 'Facebook comments on Shopify' },
+      { href: '/instagram-comments-shopify', label: 'Instagram comments on Shopify' },
+      { href: '/facebook-ads-social-proof', label: 'Facebook ads social proof' }
+    ]
+  },
+  faqTitle: 'Frequently asked questions',
+  faqs: [
+    {
+      q: 'What is Proofy?',
+      a: 'Proofy is a Shopify app that turns the positive comments on your Facebook and Instagram ads into social proof on your Shopify product pages. It’s launching soon, and you can join the waitlist for early access.'
+    },
+    {
+      q: 'How does Proofy work?',
+      a: 'You connect your Meta account and choose the ad campaigns you want Proofy to scan. Proofy collects the comments on those ads and highlights the positive ones. You choose which comments appear on your product pages, in a display you can customize.'
+    },
+    {
+      q: 'Does Proofy work with Facebook and Instagram ads?',
+      a: 'Yes. Proofy works with comments on the Facebook and Instagram ads you run through your Meta ad account. See how it handles [Facebook ad comments](/facebook-comments-shopify) and [Instagram ad comments](/instagram-comments-shopify).'
+    },
+    {
+      q: 'Can I select which comments appear on my product pages?',
+      a: 'Yes. Proofy highlights the positive comments, but nothing appears on your store until you choose it, and you can remove a comment whenever you like.'
+    },
+    {
+      q: 'Does Proofy automatically collect comments?',
+      a: 'Yes. Once you’ve chosen your campaigns, Proofy collects their comments automatically, including new ones that arrive while the ads keep running.'
+    },
+    {
+      q: 'Is Proofy compatible with Shopify?',
+      a: 'Proofy is built specifically for Shopify. It’s a Shopify app you add to your store, and the comments you choose appear on your Shopify product pages.'
+    },
+    {
+      q: 'Do I need to manually copy comments?',
+      a: 'No. Proofy gathers the comments from your selected campaigns for you, so there’s no copying, pasting or screenshotting.'
+    },
+    {
+      q: 'How do I get started?',
+      a: 'Join the waitlist with your email address. We’ll email you as soon as Proofy is ready to install on your store.'
+    }
+  ],
+  cta: {
+    title: 'Be first to put your ad comments to work',
+    text: 'Proofy is launching soon. Join the waitlist and we’ll email you when it’s ready for your Shopify store.'
+  }
 };
 
 // Screens shown in the pop-up card. `icon`: 'check' | 'mail' | 'alert'.

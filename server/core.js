@@ -52,7 +52,7 @@ function corsHeaders(request, cfg) {
 function json(request, cfg, status, body) {
   return new Response(JSON.stringify(body), {
     status,
-    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store', ...corsHeaders(request, cfg) }
+    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex', ...corsHeaders(request, cfg) }
   });
 }
 
