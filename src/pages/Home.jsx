@@ -5,6 +5,7 @@ import CommentTransitions from '../components/CommentTransitions';
 import Badge from '../components/Badge';
 import Rich, { Steps, Faq } from '../components/Rich';
 import { CtaPanel, SiteFooter } from '../components/SiteChrome';
+import ScrollDown from '../components/ScrollDown';
 import { hero, footer, home } from '../content';
 import { landingByPath } from '../content/landing';
 
@@ -127,6 +128,7 @@ export default function Home() {
         </div>
       </main>
       <SiteFooter />
+      <ScrollDown />
     </>
   );
 }

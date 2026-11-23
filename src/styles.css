@@ -1796,3 +1796,116 @@ button {
 .hero__sub {
   text-wrap: balance;
 }
+
+/* Floating scroll-down button (homepage): frosted pill like the badge, blue arrow, progress ring */
+.scroll-down {
+  position: fixed;
+  right: max(20px, env(safe-area-inset-right, 0px) + 12px);
+  bottom: max(20px, env(safe-area-inset-bottom, 0px) + 12px);
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.78);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  backdrop-filter: blur(12px) saturate(1.4);
+  box-shadow: 0 14px 30px -14px rgba(3, 105, 161, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  color: var(--blue-deep);
+  cursor: pointer;
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.2s, color 0.2s;
+  animation: scroll-down-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 1.2s both;
+}
+
+.scroll-down > * {
+  grid-area: 1 / 1;
+}
+
+.scroll-down:hover {
+  background: #ffffff;
+  color: var(--blue);
+}
+
+.scroll-down:active {
+  transform: scale(0.94);
+}
+
+.scroll-down:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.scroll-down--hidden {
+  opacity: 0;
+  transform: translateY(12px) scale(0.9);
+  pointer-events: none;
+}
+
+.scroll-down__ring {
+  width: 52px;
+  height: 52px;
+  transform: rotate(-90deg);
+}
+
+.scroll-down__ring circle {
+  fill: none;
+  stroke-width: 2;
+}
+
+.scroll-down__track {
+  stroke: rgba(14, 165, 233, 0.14);
+}
+
+.scroll-down__progress {
+  stroke: var(--blue);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.15s linear;
+}
+
+.scroll-down__arrow {
+  animation: scroll-down-bob 1.8s ease-in-out infinite;
+}
+
+.scroll-down:hover .scroll-down__arrow {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-down-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.9);
+  }
+}
+
+@keyframes scroll-down-bob {
+  0%,
+  100% {
+    transform: translateY(-2px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+@media (max-width: 640px) {
+  .scroll-down {
+    width: 46px;
+    height: 46px;
+    right: max(14px, env(safe-area-inset-right, 0px) + 8px);
+    bottom: max(14px, env(safe-area-inset-bottom, 0px) + 8px);
+  }
+  .scroll-down__ring {
+    width: 46px;
+    height: 46px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-down,
+  .scroll-down__arrow {
+    animation: none;
+  }
+}
