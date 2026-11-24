@@ -12,7 +12,7 @@ export const routes = [
     page: 'home',
     title: 'Shopify Social Proof from Ad Comments | Proofy',
     description:
-      'Turn Facebook and Instagram ad comments into social proof on your Shopify product pages. Find relevant comments from Meta campaigns with Proofy.',
+      'Proofy: Automatically turn Facebook & Instagram ad comments into authentic Shopify product reviews. No manual copying, importing, or transferring.',
     ogTitle: 'Proofy: your ad comments, now your best reviews',
     faqs: home.faqs,
     updated: HOME_UPDATED
