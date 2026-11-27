@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import LogoLoop from './reactbits/LogoLoop/LogoLoop';
 import BrandIcon from './BrandIcon';
 import { transitions } from '../content';
@@ -171,35 +172,52 @@ export function Pair({ t, i }) {
 }
 
 // A single comment → review pair, used as a still illustration on the landing pages.
-export function ExamplePair({ index = 0, caption }) {
+export function ExamplePair({ index = 0 }) {
   const t = transitions[index % transitions.length];
   return (
-    <figure className="example">
-      <div aria-hidden="true">
-        <Pair t={t} i={index} />
-      </div>
-      <figcaption className="example__caption">{caption}</figcaption>
-    </figure>
+    <div className="example" aria-hidden="true">
+      <Pair t={t} i={index} />
+    </div>
   );
 }
 
 export default function CommentTransitions() {
+  // Anything that moves on its own for more than 5 seconds gets a pause button (WCAG 2.2.2).
+  const [paused, setPaused] = useState(false);
   return (
-    <div className="ct-slider" aria-hidden="true">
-      <LogoLoop
-        logos={transitions.map((t, i) => ({ node: <Pair t={t} i={i} />, title: t.text }))}
-        speed={38}
-        gap={28}
-        logoHeight={148}
-        fadeOut
-        fadeOutWidth={0.08}
-        pauseOnHover={false}
-        reducedMotionSpeed={20}
-        draggable
-        wheel
-        intro={false}
-        ariaLabel="Example comments turned into store reviews"
-      />
+    <div className="ct-slider">
+      <div aria-hidden="true">
+        <LogoLoop
+          logos={transitions.map((t, i) => ({ node: <Pair t={t} i={i} />, title: t.text }))}
+          speed={38}
+          gap={28}
+          logoHeight={148}
+          fadeOut
+          fadeOutWidth={0.08}
+          pauseOnHover={false}
+          reducedMotionSpeed={0}
+          paused={paused}
+          draggable
+          wheel
+          intro={false}
+          ariaLabel="Example comments turned into store reviews"
+        />
+      </div>
+      <button
+        type="button"
+        className="ct-pause"
+        aria-pressed={paused}
+        aria-label={paused ? 'Play the example comments' : 'Pause the example comments'}
+        onClick={() => setPaused(p => !p)}
+      >
+        <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
+          {paused ? (
+            <path d="M8 5.5v13l11-6.5z" fill="currentColor" />
+          ) : (
+            <path d="M8 5h3v14H8zM13 5h3v14h-3z" fill="currentColor" />
+          )}
+        </svg>
+      </button>
     </div>
   );
 }

@@ -53,11 +53,8 @@ body {
   min-height: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
-  }
-}
+/* Anchor jumps are instant so keyboard focus is never left off screen; the floating
+   scroll-down button glides on its own (ScrollDown.jsx). */
 
 h1,
 h2,
@@ -70,7 +67,8 @@ button {
 }
 
 :focus-visible {
-  outline: 2px solid var(--blue);
+  /* Navy ring: reads at 3:1 or more on every ground of the page (sky blue did not) */
+  outline: 2px solid var(--ink);
   outline-offset: 3px;
   border-radius: 10px;
 }
@@ -333,9 +331,14 @@ button {
   transition: box-shadow 0.2s, border-color 0.2s;
 }
 
+.waitlist__field:has(input:focus-visible) {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
 .waitlist__field:focus-within {
-  border-color: rgba(14, 165, 233, 0.45);
-  box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.12), 0 10px 30px -18px rgba(3, 105, 161, 0.55);
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.35), 0 10px 30px -18px rgba(3, 105, 161, 0.55);
 }
 
 .waitlist__field.is-invalid {
@@ -432,6 +435,14 @@ button {
 .waitlist__privacy a {
   color: var(--ink);
   font-weight: 500;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: color 0.2s, text-decoration-color 0.2s;
+}
+
+.waitlist__privacy a:hover {
+  color: var(--blue-deep);
+  text-decoration-color: var(--blue);
 }
 
 .turnstile {
@@ -1334,12 +1345,23 @@ button {
   list-style: none;
 }
 
+/* Recessed "well" look shared by step cards and cards */
+.section {
+  --well-bg: rgba(224, 242, 254, 0.55);
+  --well-border: rgba(11, 23, 51, 0.06);
+  --well-shadow:
+    inset 0 4px 10px -2px rgba(3, 105, 161, 0.26),
+    inset 0 1px 2px rgba(11, 23, 51, 0.08),
+    0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
 .steps__item {
   padding: 20px;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.95);
-  box-shadow: 0 18px 36px -28px rgba(3, 105, 161, 0.6);
+  /* Recessed into the panel: a cooler fill, shadow on the inside top edge, light catching the bottom lip */
+  background: var(--well-bg);
+  border: 1px solid var(--well-border);
+  box-shadow: var(--well-shadow);
 }
 
 .steps__num {
@@ -1348,7 +1370,8 @@ button {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: var(--ice);
+  background: #ffffff;
+  box-shadow: 0 2px 6px -2px rgba(3, 105, 161, 0.35);
   color: var(--blue-deep);
   font-family: var(--f-display);
   font-size: 0.875rem;
@@ -1366,14 +1389,14 @@ button {
 }
 
 .steps__text {
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1.55;
   color: var(--dim);
 }
 
 .prose .steps__text {
   margin: 0;
-  font-size: 0.9375rem;
+  font-size: 1rem;
 }
 
 /* Cards (features, guide links) */
@@ -1390,10 +1413,11 @@ button {
   position: relative;
   padding: 20px 22px;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.95);
-  box-shadow: 0 18px 36px -28px rgba(3, 105, 161, 0.6);
-  transition: border-color 0.2s, box-shadow 0.2s;
+  /* Recessed into the panel, like the step cards */
+  background: var(--well-bg);
+  border: 1px solid var(--well-border);
+  box-shadow: var(--well-shadow);
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
 }
 
 .card__title {
@@ -1408,7 +1432,7 @@ button {
 
 .card__text {
   margin-top: 6px;
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.55;
   color: var(--dim);
 }
@@ -1441,7 +1465,12 @@ button {
 }
 
 .card--link:hover {
-  border-color: rgba(14, 165, 233, 0.45);
+  border-color: rgba(14, 165, 233, 0.35);
+  background: rgba(224, 242, 254, 0.75);
+  box-shadow:
+    inset 0 5px 12px -2px rgba(3, 105, 161, 0.32),
+    inset 0 1px 2px rgba(11, 23, 51, 0.1),
+    0 1px 0 rgba(255, 255, 255, 0.95);
 }
 
 .card--link:hover .card__title a {
@@ -1452,13 +1481,11 @@ button {
   transform: translateX(3px);
 }
 
-.card--link:focus-within {
-  outline: 2px solid var(--blue);
-  outline-offset: 3px;
-}
 
 .card--link .card__title a:focus-visible {
-  outline: none;
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 /* FAQ */
@@ -1510,7 +1537,7 @@ button {
 .faq__a {
   max-width: 70ch;
   padding: 0 2px 18px;
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1.65;
   color: var(--dim);
 }
@@ -1658,14 +1685,6 @@ button {
   align-items: center;
   gap: 8px;
   margin: 0;
-}
-
-.example__caption {
-  max-width: 28em;
-  font-size: 0.75rem;
-  line-height: 1.4;
-  color: var(--dim);
-  text-align: center;
 }
 
 .article__head {
@@ -1834,7 +1853,7 @@ button {
 }
 
 .scroll-down:focus-visible {
-  outline: 2px solid var(--blue);
+  outline: 2px solid var(--ink);
   outline-offset: 3px;
 }
 
@@ -1907,5 +1926,307 @@ button {
   .scroll-down,
   .scroll-down__arrow {
     animation: none;
+  }
+}
+
+
+/* ═════════ Design refinements (accessibility, step visuals, feature icons) ═════════ */
+
+/* Paragraph endings without a lone last word */
+p,
+li {
+  text-wrap: pretty;
+}
+
+/* Skip link: hidden until a keyboard user tabs to it */
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 100;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:not(:focus) {
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-link:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* Pause button for the comment slider */
+.ct-slider {
+  position: relative;
+}
+
+.ct-pause {
+  position: absolute;
+  right: 6px;
+  bottom: 2px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 8px 18px -10px rgba(3, 105, 161, 0.6);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, transform 0.15s;
+}
+
+.ct-pause:hover {
+  background: #fff;
+  color: var(--blue-deep);
+}
+
+.ct-pause:active {
+  transform: scale(0.92);
+}
+
+.ct-pause:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+/* Step illustrations: small white product fragments sitting in the recessed step cards */
+.steps--visual .steps__item {
+  display: flex;
+  flex-direction: column;
+}
+
+.steps__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 112px;
+  margin-bottom: 12px;
+}
+
+.mini {
+  width: min(100%, 268px);
+  padding: 12px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 10px 24px -16px rgba(3, 105, 161, 0.7), 0 1px 2px rgba(11, 23, 51, 0.06);
+  font-family: var(--f-text);
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.mini__row,
+.mini__head,
+.mini__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mini__logo {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: #eef5ff;
+}
+
+.mini__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.mini__text strong {
+  font-weight: 600;
+}
+
+.mini__sub {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: var(--dim);
+  font-size: 0.6875rem;
+}
+
+.mini__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: none;
+  padding: 3px 7px;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+
+.mini__pill--ok {
+  background: #ecf6df;
+  color: #3d6b12;
+}
+
+.mini__pill--picked {
+  margin-left: auto;
+  background: #ecf6df;
+  color: #3d6b12;
+  box-shadow: inset 0 0 0 1px rgba(149, 191, 71, 0.6);
+}
+
+.mini--list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.mini__box {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 4px;
+  border: 1.5px solid rgba(11, 23, 51, 0.25);
+  color: #fff;
+}
+
+.mini__box--on {
+  border-color: var(--blue);
+  background: var(--blue);
+}
+
+.mini__name {
+  flex: 1;
+  font-weight: 500;
+}
+
+.mini__item:last-child .mini__name {
+  color: var(--dim);
+}
+
+.mini__head {
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(11, 23, 51, 0.08);
+  font-weight: 600;
+}
+
+.mini__quote {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--ink);
+}
+
+/* Feature card icons: a white tile holding the real product icon */
+.card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 10px;
+  margin-bottom: 14px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 6px 14px -8px rgba(3, 105, 161, 0.55);
+}
+
+/* Phones: links outside running text get a 44px tap target */
+@media (max-width: 640px) {
+  .site-footer a,
+  .crumbs a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .site-footer li + li {
+    margin-top: 0;
+  }
+  /* bottom-left on phones, clear of the floating scroll-down button */
+  .ct-pause {
+    right: auto;
+    left: 10px;
+    bottom: -2px;
+  }
+  /* 44px tap area around the 32px button */
+  .ct-pause::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+  }
+}
+
+/* "Why it matters" illustration: the ad's comments, and the product page without them */
+.gap-visual {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.gap-visual .mini {
+  flex: 1;
+  min-width: 0;
+  align-self: stretch;
+}
+
+.gap-visual__arrow {
+  flex: none;
+}
+
+.mini__count {
+  margin-left: auto;
+  color: var(--dim);
+  font-weight: 500;
+}
+
+.mini__bubble {
+  margin: 6px 0 0;
+  padding: 6px 9px;
+  border-radius: 12px;
+  background: #f0f2f5;
+  font-size: 0.6875rem;
+  color: var(--ink);
+}
+
+.mini__empty {
+  margin: 18px 0 0;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--dim);
+}
+
+@media (max-width: 860px) {
+  .gap-visual {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mini__count {
+    display: none;
+  }
+  .gap-visual .mini__head {
+    white-space: nowrap;
   }
 }

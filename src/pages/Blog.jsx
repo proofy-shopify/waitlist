@@ -18,7 +18,7 @@ function Shell({ children, source }) {
       <PageBackdrop />
       <div className="page">
         <SiteHeader />
-        <main>
+        <main id="main">
           {children}
           <div className="sections">
             <CtaPanel title={CTA.title} text={CTA.text} source={source} />

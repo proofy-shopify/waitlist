@@ -61,18 +61,22 @@ export const home = {
     items: [
       {
         title: 'Meta campaign scanning',
+        icon: 'meta',
         text: 'Choose which Facebook and Instagram ad campaigns Proofy reads. Nothing outside your selection is touched.'
       },
       {
         title: 'Automatic comment collection',
+        icon: 'platforms',
         text: 'Comments on your selected campaigns are collected for you as they come in. No screenshots, no copy and paste.'
       },
       {
         title: 'Comment selection and management',
+        icon: 'select',
         text: 'Proofy highlights the positive comments. You decide which ones go live and can take any of them down again.'
       },
       {
         title: 'Social proof on product pages',
+        icon: 'shopify',
         text: 'Selected comments appear on your Shopify product pages in a display you can customize to suit your store.'
       }
     ]
@@ -119,7 +123,7 @@ export const home = {
       a: 'No. Proofy gathers the comments from your selected campaigns for you, so there’s no copying, pasting or screenshotting.'
     },
     {
-      q: 'How do I get started?',
+      q: 'How do I get started with Proofy?',
       a: 'Join the waitlist with your email address. We’ll email you as soon as Proofy is ready to install on your store.'
     }
   ],
@@ -194,13 +198,13 @@ export const transitions = [
   { platform: 'instagram', handle: 'jenna.makes', time: '2h', likes: 214, product: 'Cedar & Smoke Candle', text: 'Burned through mine in a week, already ordered two more 🔥' },
   { platform: 'facebook', name: 'Daniel Whitford', time: '5h', likes: 241, product: 'Kids’ Trail Sneakers', text: 'My son hasn’t taken these sneakers off since they arrived.' },
   { platform: 'instagram', handle: 'emma.swims', time: '1d', likes: 309, product: 'Saltline One-Piece', text: 'Finally a swimsuit that stays put when I actually swim 🙌' },
-  { platform: 'facebook', name: 'Priya Sharma', time: '3h', likes: 132, product: 'Loam Stoneware Mug', text: 'Heavier than I expected in the best way. My coffee tastes better, I swear.' },
+  { platform: 'facebook', name: 'Ines Calder', time: '3h', likes: 132, product: 'Loam Stoneware Mug', text: 'Heavier than I expected in the best way. My coffee tastes better, I swear.' },
   { platform: 'instagram', handle: 'omar.brews', time: '6h', likes: 190, product: 'Cinder House Blend', text: 'Switched from my old beans after one bag. Smooth, zero bitterness.' },
   { platform: 'facebook', name: 'Lena Vogel', time: '1d', likes: 118, product: 'Monstera, Medium', text: 'The plant arrived healthier than the ones at my local shop 🌿' },
   { platform: 'instagram', handle: 'maya.ontheroad', time: '4h', likes: 276, product: 'Drift Weekender Bag', text: 'Took it on three flights already. Fits under the seat and still looks brand new.' },
   { platform: 'facebook', name: 'Chris Palmer', time: '8h', likes: 76, product: 'Ferro Pro Hand Saw', text: 'Used it on a full deck rebuild. Still sharp. Worth every cent.' },
   { platform: 'instagram', handle: 'sofia.glow', time: '3d', likes: 412, product: 'Dewy Barrier Serum', text: 'Two weeks in and my skin has never looked this calm. Obsessed ✨' },
-  { platform: 'facebook', name: 'Marcus Reed', time: '2d', likes: 154, product: 'Trailhead Running Shorts', text: 'Ran a half marathon in these. No chafing, pockets actually hold my phone.' },
+  { platform: 'facebook', name: 'Tobias Wren', time: '2d', likes: 154, product: 'Trailhead Running Shorts', text: 'Ran a half marathon in these. No chafing, pockets actually hold my phone.' },
   { platform: 'instagram', handle: 'the.cozy.nook', time: '9h', likes: 233, product: 'Chunky Knit Throw', text: 'Softest blanket we own. The dog has officially claimed it 🐶' },
-  { platform: 'facebook', name: 'Aisha Rahman', time: '12h', likes: 168, product: 'Cedar & Smoke Candle', text: 'The smell fills my whole apartment. Best candle I’ve bought this year.' }
+  { platform: 'facebook', name: 'Leyla Dorsey', time: '12h', likes: 168, product: 'Cedar & Smoke Candle', text: 'The smell fills my whole apartment. Best candle I’ve bought this year.' }
 ];

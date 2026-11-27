@@ -4,3 +4,5 @@ dist-single
 .env
 .env.local
 dist-ssr
+.taste-skill
+shots

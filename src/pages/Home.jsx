@@ -6,6 +6,7 @@ import Badge from '../components/Badge';
 import Rich, { Steps, Faq } from '../components/Rich';
 import { CtaPanel, SiteFooter } from '../components/SiteChrome';
 import ScrollDown from '../components/ScrollDown';
+import { stepVisuals, FeatureIcon, GapVisual } from '../components/StepVisuals';
 import { hero, footer, home } from '../content';
 import { landingByPath } from '../content/landing';
 
@@ -15,7 +16,7 @@ export default function Home() {
       <PageBackdrop />
       {/* First screen: unchanged design. The big tagline stays the visual headline; the line under
           it is the page's <h1> ("…Shopify social proof"), styled exactly as before. */}
-      <main>
+      <main id="main">
         <div className="stage">
           <div className="device">
             <div className="device__screen">
@@ -77,13 +78,14 @@ export default function Home() {
             <p className="section__eyebrow">{home.how.eyebrow}</p>
             <h2 id="how-title" className="section__title">{home.how.title}</h2>
             <p className="section__intro">{home.how.intro}</p>
-            <Steps steps={home.how.steps} />
+            <Steps steps={home.how.steps} visuals={stepVisuals} />
           </section>
 
           <section className="section section--split" aria-labelledby="why-title">
             <div>
               <p className="section__eyebrow">{home.why.eyebrow}</p>
               <h2 id="why-title" className="section__title">{home.why.title}</h2>
+              <GapVisual />
             </div>
             <div className="prose">
               {home.why.paragraphs.map(t => (
@@ -98,6 +100,7 @@ export default function Home() {
             <ul className="cards">
               {home.features.items.map(f => (
                 <li key={f.title} className="card">
+                  <FeatureIcon name={f.icon} />
                   <h3 className="card__title">{f.title}</h3>
                   <p className="card__text">{f.text}</p>
                 </li>
@@ -111,6 +114,7 @@ export default function Home() {
             <ul className="cards cards--links">
               {home.guides.links.map(g => (
                 <li key={g.href} className="card card--link">
+                  <FeatureIcon name={landingByPath[g.href].icon} />
                   <h3 className="card__title">
                     <a href={g.href}>{g.label}</a>
                   </h3>

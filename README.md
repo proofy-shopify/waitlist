@@ -78,6 +78,13 @@ ease-out after you stop scrolling) is a small `wheel` prop added to React Bits' 
 glides with `WHEEL_TAU` at the top of `LogoLoop.jsx`. Edit the pairs in `transitions` in
 `src/content.js`; `platform` picks the Instagram or Facebook look. All people and stores are made up.
 
+## Accessibility
+
+- A "Skip to content" link is the first Tab stop on every page.
+- Keyboard focus shows a 2px navy ring (the email pill draws it around the whole field).
+- The comment slider has a pause button and stands still for visitors who ask for reduced motion
+  (it can still be dragged or scrolled).
+
 ## Font
 
 The page asks for **SF Pro Display / SF Pro Text** first via the system font stack (`-apple-system`), so
@@ -136,6 +143,8 @@ src/
     Badge.jsx              "proofy · coming soon" badge with the shine
     SiteChrome.jsx         inner-page header, breadcrumbs, final waitlist panel, footer
     Rich.jsx               copy renderer, numbered steps, FAQ
+    StepVisuals.jsx        small product fragments for the homepage steps, "why" section and card icons
+    ScrollDown.jsx         floating scroll-down button (homepage)
     reactbits/
 ```
 

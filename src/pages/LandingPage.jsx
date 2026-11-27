@@ -1,6 +1,7 @@
 import { PageBackdrop, FrameBackground } from '../components/Backgrounds';
 import WaitlistForm from '../components/WaitlistForm';
 import { ExamplePair } from '../components/CommentTransitions';
+import { FeatureIcon } from '../components/StepVisuals';
 import { Block, Faq } from '../components/Rich';
 import { SiteHeader, Breadcrumbs, CtaPanel, SiteFooter } from '../components/SiteChrome';
 import { landingByPath } from '../content/landing';
@@ -16,7 +17,7 @@ export default function LandingPage({ path }) {
       <PageBackdrop />
       <div className="page">
         <SiteHeader />
-        <main>
+        <main id="main">
           <div className="device lp-hero">
             <div className="device__screen lp-hero__screen">
               <FrameBackground />
@@ -26,10 +27,7 @@ export default function LandingPage({ path }) {
                 <p className="lp-hero__intro">{page.intro}</p>
                 <WaitlistForm source={source(page.path)} />
               </div>
-              <ExamplePair
-                index={page.example}
-                caption="Example: an ad comment shown as a review on a Shopify product page. Names and stores are made up."
-              />
+              <ExamplePair index={page.example} />
             </div>
           </div>
 
@@ -50,6 +48,7 @@ export default function LandingPage({ path }) {
               <ul className="cards cards--links">
                 {related.map(r => (
                   <li key={r.path} className="card card--link">
+                    <FeatureIcon name={r.icon} />
                     <h3 className="card__title">
                       <a href={r.path}>{r.crumb}</a>
                     </h3>
@@ -57,6 +56,7 @@ export default function LandingPage({ path }) {
                   </li>
                 ))}
                 <li className="card card--link">
+                  <FeatureIcon name="select" />
                   <h3 className="card__title">
                     <a href="/#how-it-works">How Proofy works</a>
                   </h3>
