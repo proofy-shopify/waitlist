@@ -66,6 +66,9 @@ export default function App({ children }) {
 
   return (
     <WaitlistContext.Provider value={waitlist}>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
       {children}
       {modalUsed && (
         <Suspense fallback={null}>

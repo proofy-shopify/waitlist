@@ -542,8 +542,9 @@ const createEngine = (root, track, config, setLayout) => {
       }
     }
     const travel = Math.sign(cfg.speed) || 1;
-    const paused = st.focused || (st.hovered && cfg.hoverValue !== undefined);
-    const pausedSpeed = st.focused ? 0 : (cfg.hoverValue ?? 0);
+    // Added: `paused` prop (a pause button) stops the loop like keyboard focus does.
+    const paused = cfg.paused || st.focused || (st.hovered && cfg.hoverValue !== undefined);
+    const pausedSpeed = cfg.paused || st.focused ? 0 : (cfg.hoverValue ?? 0);
     // Added: with reduced motion, drift at reducedMotionSpeed (if set) instead of stopping.
     const autoSpeed = st.reduced ? (cfg.reducedMotionSpeed ?? 0) : cfg.speed;
     let target = paused ? pausedSpeed * travel * cfg.dirSign : autoSpeed * cfg.dirSign;
@@ -935,6 +936,7 @@ export const LogoLoop = memo(
     draggable = true,
     wheel = false,
     reducedMotionSpeed,
+    paused = false,
     scrollBoost = 0,
     intro = true,
     renderItem,
@@ -965,6 +967,7 @@ export const LogoLoop = memo(
       draggable,
       wheel,
       reducedMotionSpeed,
+      paused,
       scrollBoost,
       intro,
       scaleOnHover,
@@ -980,6 +983,10 @@ export const LogoLoop = memo(
         engineRef.current = null;
       };
     }, []);
+
+    useEffect(() => {
+      engineRef.current?.wake();
+    }, [paused]);
 
     useIsomorphicLayoutEffect(() => {
       engineRef.current?.refresh();

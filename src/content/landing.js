@@ -6,6 +6,7 @@
 export const landingPages = [
   {
     path: '/shopify-social-proof',
+    icon: 'shopify',
     // Short summary used on link cards (homepage guides, related guides)
     teaser: 'What social proof is, where it belongs on a product page, and how ad comments fit in.',
     crumb: 'Shopify social proof',
@@ -111,6 +112,7 @@ export const landingPages = [
 
   {
     path: '/facebook-comments-shopify',
+    icon: 'facebook',
     // Short summary used on link cards (homepage guides, related guides)
     teaser: 'Get Facebook ad comments out from under your ads and onto your product pages.',
     crumb: 'Facebook comments on Shopify',
@@ -213,6 +215,7 @@ export const landingPages = [
 
   {
     path: '/instagram-comments-shopify',
+    icon: 'instagram',
     // Short summary used on link cards (homepage guides, related guides)
     teaser: 'Make short, enthusiastic Instagram ad comments work on a product page.',
     crumb: 'Instagram comments on Shopify',
@@ -295,6 +298,7 @@ export const landingPages = [
 
   {
     path: '/facebook-ads-social-proof',
+    icon: 'meta',
     // Short summary used on link cards (homepage guides, related guides)
     teaser: 'Put the engagement you already paid for to work where shoppers decide to buy.',
     crumb: 'Facebook ads social proof',

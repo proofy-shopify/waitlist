@@ -27,12 +27,14 @@ export function Block({ block }) {
   return null;
 }
 
-export function Steps({ steps, headingLevel = 3 }) {
+// `visuals`: optional illustration per step, shown above its number.
+export function Steps({ steps, headingLevel = 3, visuals }) {
   const H = `h${headingLevel}`;
   return (
-    <ol className="steps">
+    <ol className={`steps${visuals ? ' steps--visual' : ''}`}>
       {steps.map((s, i) => (
         <li key={s.title} className="steps__item">
+          {visuals?.[i] && <div className="steps__visual" aria-hidden="true">{visuals[i]}</div>}
           <span className="steps__num" aria-hidden="true">{i + 1}</span>
           <H className="steps__title">{s.title}</H>
           <p className="steps__text"><Rich text={s.text} /></p>

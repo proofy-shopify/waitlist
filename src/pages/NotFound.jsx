@@ -9,7 +9,7 @@ export default function NotFound() {
       <PageBackdrop />
       <div className="page">
         <SiteHeader ctaHref="/#join" />
-        <main className="sections article">
+        <main id="main" className="sections article">
           <div className="section article__head notfound">
             <h1 className="article__title">We couldn’t find that page.</h1>
             <p className="article__intro">
