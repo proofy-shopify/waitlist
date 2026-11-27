@@ -35,7 +35,6 @@ export function Steps({ steps, headingLevel = 3, visuals }) {
       {steps.map((s, i) => (
         <li key={s.title} className="steps__item">
           {visuals?.[i] && <div className="steps__visual" aria-hidden="true">{visuals[i]}</div>}
-          <span className="steps__num" aria-hidden="true">{i + 1}</span>
           <H className="steps__title">{s.title}</H>
           <p className="steps__text"><Rich text={s.text} /></p>
         </li>
